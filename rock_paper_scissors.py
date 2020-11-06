@@ -1,6 +1,6 @@
 # master
 
-#imports
+#imported modules
 
 import time
 import math
@@ -33,8 +33,29 @@ def readyCheck(): #debugged & works
         exitGame()
     else:
         print('Please enter yes or no.')
-        time.sleep(2)
+        time.sleep(.5)
         readyCheck()
+
+def randomOpponent(): #debugged & works
+    listOfOpponents = ['Larry', 'Curly', 'Moe']
+    opponentName = random.choice(listOfOpponents)
+    print('Your opponent today is ' + opponentName + '!') 
+    return()
+
+def playerMoveChoice(playerScore, opponentScore):
+    playerMove = input('What object do you choose (rock, paper, or scissor)?: ').lower() #sanitize input
+    if playerMove == 'rock' or playerMove == 'paper' or playerMove == 'scissor':
+        print('You picked ' + playerMove + '!')
+        time.sleep(.5)
+        opponentMove(playerScore, opponentScore, playerMove)
+    else:
+        print('Please rock, paper, or scissor.')
+        time.sleep(.5)
+        playerMoveChoice(playerScore, opponentScore)
+
+##def opponentMove(playerScore, opponentScore, playerMove):
+##    
+##def moveCompare(playerScore, opponentScore, playerMove, opponentMove):
 
 #define 
 
@@ -49,15 +70,24 @@ def readyCheck(): #debugged & works
 #start program here
 
 print('Welcome to Rock, Paper, Scissors!')
-time.sleep(2)
-print('Instructions...')
-time.sleep(7)
+time.sleep(1)
 playerName = input("What is your name? ")
 time.sleep(.5)
-print('Thank you, ' + playerName + '!')
+print('Hi, ' + playerName + '! Today, we will test your skills against our bots (Larry, Curly, and Moe) and see if you have the skills to best them in this classic game of chance!')
+time.sleep(5)
+readyCheck() 
+randomOpponent() #debugged up to this point
+print("Let's get ready to battle!")
 time.sleep(2)
-readyCheck()
-print("Test Return") #debugged up to this point
+print('Rembember, rock beats scissors, scissors beat paper, and paper beats rock! Best 2 out of 3 wins!')  
+time.sleep(5)
+playerScore = 0
+opponentScore = 0
+while playerScore < 2 or opponentScore < 2:
+    playerMoveChoice(playerScore, opponentScore)
+    print("Test Text") 
+
+
 
 
 
