@@ -78,13 +78,13 @@ time.sleep(2)
 print("Let's get ready to battle!")
 time.sleep(1)
 print('Rembember, rock beats scissors, scissors beat paper, and paper beats rock! Best 2 out of 3 wins!')  
-time.sleep(3) #debugged up to this point
+time.sleep(3) 
 playerScore = 0
 opponentScore = 0
 roundCounter = 1
 while playerScore < 2 and opponentScore < 2:
     print('Round ' + str(roundCounter) + '!')
-    time.sleep(1) #bug after this...
+    time.sleep(1)
     playerMoveMain = playerMoveChoice()
     print('You picked ' + playerMoveMain + '...')
     time.sleep(1)
