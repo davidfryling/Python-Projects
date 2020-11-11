@@ -6,9 +6,27 @@ import time
 import math
 import random
 
+##def readyCheck(): #not necessary
+##    ready = input('Are you ready to get started (yes or no)?: ').lower() #sanitize input
+##    time.sleep(.5)
+##    if ready == 'yes':
+##        print("Great! Let's begin!")
+##        time.sleep(1)
+##        main()
+##    elif ready == 'no':
+##        print('Sorry to hear that...')
+##        time.sleep(1)
+##        print('Maybe next time...')
+##        time.sleep(1)
+##        exitGame()
+##    else:
+##        print('Please enter yes or no.')
+##        time.sleep(.5)
+##        readyCheck()
+
 #call functions
 
-def exitGame(): #bug free
+def exitGame(): #allows game to end after each match
     print('Exiting game in...')
     time.sleep(1)
     counter = 5
@@ -18,34 +36,17 @@ def exitGame(): #bug free
         counter = counter - 1
     quit()
 
-def readyCheck(): #bug free
-    ready = input('Are you ready to get started (yes or no)?: ').lower() #sanitize input
-    time.sleep(.5)
-    if ready == 'yes':
-        print("Great! Let's begin!")
-        time.sleep(1)
-        return()
-    elif ready == 'no':
-        print('Sorry to hear that...')
-        time.sleep(1)
-        print('Maybe next time...')
-        time.sleep(1)
-        exitGame()
-    else:
-        print('Please enter yes or no.')
-        time.sleep(.5)
-        readyCheck()
-
-def playerMoveChoice(): #not bug free
+def playerMoveChoice(): #creates and stores usable player move to play in each while loop
+    global playerMove
     playerMove = input('What object do you choose (rock, paper, or scissor)?: ').lower() #sanitize input
     if playerMove == 'rock' or playerMove == 'paper' or playerMove == 'scissor':
        return(playerMove)
     else:
-        print('Please enter rock, paper, or scissor.') #BUG!!!! will not work if wrong input wrong
+        print('Please enter rock, paper, or scissor.') 
         time.sleep(.5)
         playerMoveChoice()
 
-def playAgainChoice(): #bug free
+def playAgainChoice(): #allows player to continue or leave the game
     playAgain = input('Would you like to play again (yes or no)?: ').lower() #sanitize input
     if playAgain == 'yes':
         print("Great! Let's start over!")
@@ -62,16 +63,21 @@ def playAgainChoice(): #bug free
         time.sleep(.5)
         playAgainChoice()
 
-#main program here
+#intro (only runs the first time through in order to welcome player and get their name)
 
-def main(): #bug free
+def intro(): #bug free
     print('Welcome to Rock, Paper, Scissors!')
     time.sleep(1)
+    global playerName
     playerName = input("What is your name? ")
     time.sleep(.5)
     print('Hi, ' + playerName + '! Today, you will test your skills against one of our bots (Larry, Curly, or Moe) and see if you have the skills to best them in this classic game of chance!')
     time.sleep(3)
-    readyCheck() 
+    main() 
+
+#main program here, which can be rerun until the play chooses not to continue
+
+def main(): 
     listOfOpponents = ['Larry', 'Curly', 'Moe']
     opponentName = random.choice(listOfOpponents)
     print('This time, your opponent is ' + opponentName + '!')
@@ -86,7 +92,7 @@ def main(): #bug free
     while playerScore < 2 and opponentScore < 2:
         print('Round ' + str(roundCounter) + '!')
         time.sleep(1)
-        playerMove = playerMoveChoice()
+        playerMoveChoice()
         print('You picked ' + playerMove + '...')
         time.sleep(1)
         moveList = ['rock', 'paper', 'scissor']
@@ -108,7 +114,7 @@ def main(): #bug free
             time.sleep(2)
             playerScore = playerScore + 1 
             opponentScore = opponentScore + 0 
-        print("Let's check you score now...")
+        print("Let's check the score...")
         time.sleep(1)
         print('Your score is ' + str(playerScore))
         time.sleep(1)
@@ -125,8 +131,8 @@ def main(): #bug free
         time.sleep(3)
     playAgainChoice()
 
-#initiate main program
-main()
+#initiate start of game (i.e., intro program)
+intro()
 
 
 
